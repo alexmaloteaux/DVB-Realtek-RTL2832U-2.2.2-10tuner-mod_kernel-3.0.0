@@ -47,6 +47,9 @@ INCLUDE_EXTRA_DVB := include-$(shell $(DETECT_KERNEL_MACRO))
 # kernel 3.9.0 /3.10.0
 #INCLUDE_EXTRA_DVB := include-390
 
+# kernel 3.11.0
+#INCLUDE_EXTRA_DVB := include-311
+
 # ----------------------------------------
 
 # current dir
