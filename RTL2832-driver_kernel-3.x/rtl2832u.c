@@ -842,11 +842,12 @@ static struct usb_device_id rtl2832u_usb_table [] = {
 	//Some additionnal tested PID/VID added for 2.3.0
 	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00D7)},  	// 77 Terratec T Stick+
 	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00D3)},		// 78 cinergy tstick rc rev.3
+	{ USB_DEVICE(USB_VID_KWORLD_1ST, USB_PID_KWORLD_C880) },  	// 79 
 	
 	//some untested additional vid/pid from http://sdr.osmocom.org/trac/wiki/rtl-sdr
-	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00E0)},		// 79 Terratec NOXON DAB/DAB+ USB dongle (rev 2) 
-	{ USB_DEVICE(USB_VID_KWORLD_1ST, USB_PID_KWORLD_D39D) },	// 80 SVEON STV20 DVB-T USB & FM 
-	{ USB_DEVICE(USB_VID_KYE, USB_PID_KYE_707F)},			// 81 Genius TVGo DVB-T03 USB dongle (Ver. B) 
+	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00E0)},		// 80 Terratec NOXON DAB/DAB+ USB dongle (rev 2) 
+	{ USB_DEVICE(USB_VID_KWORLD_1ST, USB_PID_KWORLD_D39D) },	// 81 SVEON STV20 DVB-T USB & FM 
+	{ USB_DEVICE(USB_VID_KYE, USB_PID_KYE_707F)},			// 82 Genius TVGo DVB-T03 USB dongle (Ver. B) 
 	{ 0 },
 };
 
@@ -1341,7 +1342,7 @@ static struct dvb_usb_device_properties rtl2832u_5th_properties = {
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
 	
-	.num_device_descs = 9,
+	.num_device_descs = 10,
 	.devices = {
 		{ .name = "RTL2832U DVB-T USB DEVICE",
 		  .cold_ids = { NULL, NULL },
@@ -1388,7 +1389,11 @@ static struct dvb_usb_device_properties rtl2832u_5th_properties = {
 		  .cold_ids = { NULL, NULL },
 		  .warm_ids = { &rtl2832u_usb_table[44], NULL },
 		},				
-		
+
+		{ .name = "USB DVB-T DEVICE",
+		  .cold_ids = { NULL, NULL },
+		  .warm_ids = { &rtl2832u_usb_table[79], NULL },
+		},		
 		
 	}
 };
