@@ -46,8 +46,10 @@
 	#define USB_VID_TERRATEC					0x0CCD
 #endif
 #define	USB_PID_TERRATEC_00A9					0x00A9
+#define USB_PID_TERRATEC_00D7          				0x00D7
 #define	USB_PID_TERRATEC_00B3					0x00B3
 #define	USB_PID_TERRATEC_00D3					0x00D3
+#define USB_PID_TERRATEC_00E0          				0x00E0
 
 #ifndef USB_VID_AZUREWAVE_2
 	#define	USB_VID_AZUREWAVE_2					0x13D3
@@ -81,6 +83,7 @@
 #define	USB_PID_KWORLD_D3A1						0xD3A1
 #define	USB_PID_KWORLD_D3A4						0xD3A4
 #define	USB_PID_KWORLD_E41D						0xE41D
+#define USB_PID_KWORLD_D39D            					0xD39D
 
 #ifndef USB_VID_GOLDENBRIDGE
 	#define	USB_VID_GOLDENBRIDGE				0x1680
@@ -113,6 +116,10 @@
 #define	USB_PID_LEADTEK_WARM_2					0x6F11
 #define	USB_PID_LEADTEK_WARM_3					0x6A03
 
+#ifndef USB_VID_KYE
+	#define  USB_VID_KYE              			0x1B80
+#endif
+#define  USB_PID_KYE_707F			            	0x707F
 
 #ifndef  USB_VID_COMPRO
 	#define USB_VID_COMPRO						0x185B

@@ -785,7 +785,6 @@ static struct usb_device_id rtl2832u_usb_table [] = {
 
 	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00A9)},	// 29
 	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00B3)},	// 30
-	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00D3)},	// cinergy tstick rc rev.3
 
 	{ USB_DEVICE(USB_VID_AZUREWAVE_2, USB_PID_AZUREWAVE_3234) },	// 31
 	{ USB_DEVICE(USB_VID_AZUREWAVE_2, USB_PID_AZUREWAVE_3274) },	// 32
@@ -821,8 +820,7 @@ static struct usb_device_id rtl2832u_usb_table [] = {
 	{ USB_DEVICE(USB_VID_GTEK, USB_PID_GTEK_WARM_A683)},		// 59
 
 	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_1)},		// 60			
-	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_2)},		// 61
-	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_3)},		
+	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_2)},		// 61	
 
 	{ USB_DEVICE(USB_VID_YUAN, USB_PID_YUAN_WARM)},			//62
         { USB_DEVICE(USB_VID_YUAN, USB_PID_YUAN_WARM80)},		//63
@@ -836,11 +834,19 @@ static struct usb_device_id rtl2832u_usb_table [] = {
 	{ USB_DEVICE(USB_VID_COMPRO, USB_PID_COMPRO_WARM_9580)},	// 70			
 	{ USB_DEVICE(USB_VID_COMPRO, USB_PID_COMPRO_WARM_9550)},	// 71			
 	{ USB_DEVICE(USB_VID_COMPRO, USB_PID_COMPRO_WARM_9540)},	// 72			
-	{ USB_DEVICE(USB_VID_COMPRO, USB_PID_COMPRO_WARM_9530)},	// 73  71																						//------rtl2832u_6th_properties(6)
+	{ USB_DEVICE(USB_VID_COMPRO, USB_PID_COMPRO_WARM_9530)},	// 73
 	{ USB_DEVICE(USB_VID_COMPRO,  USB_PID_COMPRO_WARM_9520)},	// 74
+	{ USB_DEVICE(USB_VID_GOLDENBRIDGE, USB_PID_GOLDENBRIDGE_WARM)},	// 75	
+	{ USB_DEVICE(USB_VID_LEADTEK, USB_PID_LEADTEK_WARM_3)},    	// 76
+
+	//Some additionnal tested PID/VID added for 2.3.0
+	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00D7)},  	// 77 Terratec T Stick+
+	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00D3)},		// 78 cinergy tstick rc rev.3
 	
-	{ USB_DEVICE(USB_VID_GOLDENBRIDGE, USB_PID_GOLDENBRIDGE_WARM)},	//75	
-													
+	//some untested additional vid/pid from http://sdr.osmocom.org/trac/wiki/rtl-sdr
+	{ USB_DEVICE(USB_VID_TERRATEC, USB_PID_TERRATEC_00E0)},		// 79 Terratec NOXON DAB/DAB+ USB dongle (rev 2) 
+	{ USB_DEVICE(USB_VID_KWORLD_1ST, USB_PID_KWORLD_D39D) },	// 80 SVEON STV20 DVB-T USB & FM 
+	{ USB_DEVICE(USB_VID_KYE, USB_PID_KYE_707F)},			// 81 Genius TVGo DVB-T03 USB dongle (Ver. B) 
 	{ 0 },
 };
 
@@ -1219,7 +1225,7 @@ static struct dvb_usb_device_properties rtl2832u_4th_properties = {
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
 	
-	.num_device_descs = 9,
+	.num_device_descs = 10,
 	.devices = {
 		{ .name = "DK DONGLE",
 		  .cold_ids = { NULL, NULL },
@@ -1237,6 +1243,11 @@ static struct dvb_usb_device_properties rtl2832u_4th_properties = {
 		  .name = "Terratec Cinergy T Stick Black",
 		  .cold_ids = { NULL, NULL },
 		  .warm_ids = { &rtl2832u_usb_table[30], NULL },
+		},
+		{
+		  .name = "Terratec Cinergy T Stick RC",
+		  .cold_ids = { NULL, NULL },
+		  .warm_ids = { &rtl2832u_usb_table[78], NULL },
 		},
 		{
 		  .name = "USB DVB-T Device",
@@ -1761,7 +1772,7 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
 		.rc_interval  = RT_RC_POLLING_INTERVAL_TIME_MS,		
 	},
 	
-	.num_device_descs = 4,
+	.num_device_descs = 6,
 	.devices = {
 		{
 		  .name ="VideoMate DTV",
@@ -1781,6 +1792,14 @@ static struct dvb_usb_device_properties rtl2832u_9th_properties = {
 		  .cold_ids = { NULL, NULL },
 		  .warm_ids = { &rtl2832u_usb_table[75], NULL },
 		},
+		{ .name = "USB DVB-T Device",
+		  .cold_ids = { NULL, NULL },
+		  .warm_ids = { &rtl2832u_usb_table[76], NULL },
+		},
+		{ .name = "Terratex T Stick+",
+		  .cold_ids = { NULL, NULL },
+		  .warm_ids = { &rtl2832u_usb_table[77], NULL },
+		}, 
 		{ NULL },				
 	}
 };
