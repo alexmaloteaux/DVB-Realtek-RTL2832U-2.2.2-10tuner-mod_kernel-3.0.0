@@ -1,13 +1,46 @@
 # License: GPL
 # RTL2832U Driver
 
-# Choose here wich include file to use: from kernel 3.0.0 (good for 3.1.0) or from kernel 3.2.0
+#rem : 3.10 not tested...
+DETECT_KERNEL_MACRO := case `uname -r` in \
+			3.10*) echo "390";; \
+			3.9*)  echo "390";; \
+			3.8*)  echo "360";; \
+			3.7*)  echo "360";; \
+			3.6*)  echo "360";; \
+			3.5*)  echo "350";; \
+			3.4*)  echo "340";; \
+			3.3*)  echo "330";; \
+			3.2*)  echo "320";; \
+			3.1*)  echo "300";; \
+			3.0*)  echo "300";; \
+			*)     echo "ERROR";; esac
 
+INCLUDE_EXTRA_DVB := include-$(shell $(DETECT_KERNEL_MACRO))
+
+# ----------------------------------------
+#!!!If the above command don't work!!!
+#Choose here wich include file to use corresponding to your kernel
 # kernel 3.0.0 / 3.1.0
-INCLUDE_EXTRA_DVB := include-340
+#INCLUDE_EXTRA_DVB := include-300
 
 # kernel 3.2.0
 #INCLUDE_EXTRA_DVB := include-320
+
+# kernel 3.3.0
+#INCLUDE_EXTRA_DVB := include-330
+
+# kernel 3.4.0
+#INCLUDE_EXTRA_DVB := include-340
+
+# kernel 3.5.0
+#INCLUDE_EXTRA_DVB := include-350
+
+# kernel 3.6.0 / 3.7.0 / 3.8.0
+#INCLUDE_EXTRA_DVB := include-360
+
+# kernel 3.9.0 /3.10.0
+#INCLUDE_EXTRA_DVB := include-390
 
 # ----------------------------------------
 

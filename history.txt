@@ -1,5 +1,10 @@
 
 History of Realtek RTL2832U DVB-T Linux Driver:
+
+Ver 2.3.0  a. Added several PID/VID
+	   b. Enable compilation for kernel between 3.0 and 3.10
+	   c. Misc/Cleanups 
+
 Ver 2.2.2  a. support rc function
 
 Ver 2.2.1  a.PID/VID
