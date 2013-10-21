@@ -1,26 +1,46 @@
-2011-11-07
+2013-10-01
 
-Original Realtek RTL2832U chipset (DVB/DAB) Linux 2.6.x driver rel. 2.2.2 , "full" version
-
-Thanks to Realtek
-
-Thanks to Xgazza
-Thanks to Skaman
-Thanks to Gennar1
-
-This driver is the "full" version using DVB-T, DVB-C, DTMB and 10 tuners
-It looks to work also with DAB/DAB+ digital radio stick as Terratec NOXON DAB
-
-Driver patched for Linux kernel 3.0.0 (Ubuntu Oneiric), 3.1.0 and 3.2.0 (Thanks Hans-Frieder Vogt and Gennar1)
-Can compile with kernel 2.6.x (2.6.x-3.0.0 main differences are about handling RC)
-
-Main thread about OpenPli project: http://openpli.org/forums/topic/20899-rtl2832u-chipset-support-proposal/
+Realtek RTL2832U Driver 2.3.0 for Kernel >= 3.0
+Based on the Original Realtek RTL2832U chipset (DVB/DAB) Linux 2.6.x driver rel. 2.2.2 , "full" version
 
 
-!! WORK IN PROGRESS , ALPHA STATE !!
+**** UBUNTU CLASSIC INSTALL ****
 
+- clone this repo using git clone and go into source dir
+
+apt-get install build-essential linux-headers-$(uname -r) git
+cd RTL2832-driver_kernel-3.x
+make clean
+make
+make install
+modprobe dvb_usb_rtl2832u
+
+insert dvb stick and check logs with dmesg
+
+Note: Module dvb_usb_rtl2832u has many options (use modinfo dvb_usb_rtl2832u to see them)
+
+- if you want enable basic debug (default disabled) use:
+modprobe dvb_usb_rtl2832u debug=1
+- if you want enable remote_command (default disabled) use:
+modprobe dvb_usb_rtl2832u rc_mode=2  (or =0 or =1)
+
+**** UBUNTU DMKS INSTALL ****
+
+extract to /usr/src then :
+
+cd /usr/src/DVB-RTL/RTL2832-driver_kernel-3.x
+ln -s "$PWD" /usr/src/dvb-rtl2832u-2.3.0
+(eventually :dkms remove -m dvb-rtl2832u -v 2.x.x --all)
+dkms add -m dvb-rtl2832u -v 2.3.0
+dkms build -m dvb-rtl2832u -v 2.3.0
+dkms install -m dvb-rtl2832u -v 2.3.0
+modprobe dvb-usb-rtl2832u
+
+
+******************************
 
 Tested with:
+ Kali  (3.7) & Ubuntu 13.04 (3.8) + Terratec Noxon DAB/DAB+ Rev 1 (ID 0ccd:00b3) : compile OK, works OK
  Xubuntu 11.10 64bit kernel 3.0 + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
  Lubuntu 11.10 32bit kernel 3.0 (cpu 64bit) + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
  OpenPli 2011-11-27 ClarkeTech ET9100 (cpu Broadcom) kernel 3.1 + DIKOM USB-DVBT HD (ID 1b80:d394) : compile OK, works OK
@@ -36,70 +56,12 @@ Some DVB-T stick equipped with rtl2832:
   DIGIVOX mini II v3.0 (ID 1d19:1101)
 
 
-**** UBUNTU FRESH INSTALL ****
+See also :
+ http://openpli.org/forums/topic/20899-rtl2832u-chipset-support-proposal/
 
-- install compile kit
-sudo apt-get install build-essential
-
-- install linux headers
-sudo apt-get install linux-headers-$(uname -r)
-
-- install git
-sudo apt-get install git
-
-- clone this repo using git
-git clone https://github.com/ambrosa/DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0.git 
-
-- goto into source dir
-cd DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0
-cd RTL2832-2.2.2_kernel-3.0.0
-
-- edit Makefile, option INCLUDE_EXTRA_DVB (choose which include file set)
-
-- compile code
-make clean
-make
-
-- install module
-sudo make install
-
-- insert module (or reboot)
-modprobe dvb_usb_rtl2832u
-
-If all is fine you can see in kernel log something like this:
-  [18087.037024] dvb-usb: found a 'USB DVB-T DEVICE' in warm state.
-  [18087.037031] dvb-usb: will pass the complete MPEG2 transport stream to the software demuxer.
-  [18087.038776] DVB: registering new adapter (USB DVB-T DEVICE)
-  [18087.055952] RTL2832U usb_init_bulk_setting : USB2.0 HIGH SPEED (480Mb/s)
-  [18087.287475] RTL2832U check_tuner_type : FC0012 tuner on board...
-  [18087.853235] DVB: registering adapter 0 frontend 0 (Realtek DVB-T RTL2832)...
-  [18087.853384] input: IR-receiver inside an USB DVB receiver as /devices/pci0000:00/0000:00:1d.7/usb1/1-7/input/input15
-  [18087.853419] dvb-usb: schedule remote query interval to 287 msecs.
-  [18087.853423] dvb-usb: USB DVB-T DEVICE successfully initialized and connected.
-  [18087.853447] usbcore: registered new interface driver dvb_usb_rtl2832u
-
-
-Note: Module dvb_usb_rtl2832u has many options (use modinfo dvb_usb_rtl2832u to see them)
-
-- if you want enable basic debug (default disabled) use:
-modprobe dvb_usb_rtl2832u debug=1
-- if you want enable remote_command (default disabled) use:
-modprobe dvb_usb_rtl2832u rc_mode=2  (or =0 or =1)
-
-
-**** UPDATING LOCAL GIT REPO WITH NEW CHANGES ****
-
-- go into local git repo 
-cd DVB-Realtek-RTL2832U-2.2.2-10tuner-mod_kernel-3.0.0
-
-- update local files with new changes
-git pull
-
-- compile 
-cd RTL2832-2.2.2_kernel-3.0.0
-make clean
-make
-
-- install module
-sudo make install
+Thanks to Realtek
+Thanks to Xgazza
+Thanks to Skaman
+Thanks to Gennar1
+Thanks Hans-Frieder Vogt (3.0.0 patch)
 
