@@ -3,6 +3,11 @@
 
 #rem : 3.10 not tested...
 DETECT_KERNEL_MACRO := case `uname -r` in \
+			3.15*) echo "ERROR";; \
+			3.14*) echo "ERROR";; \
+			3.13*) echo "ERROR";; \
+			3.12*) echo "ERROR";; \
+			3.11*) echo "ERROR";; \
 			3.10*) echo "390";; \
 			3.9*)  echo "390";; \
 			3.8*)  echo "360";; \
